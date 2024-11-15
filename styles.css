@@ -1,0 +1,391 @@
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #e3f2fd; /* Light hospital blue */
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  /* Hallway container */
+  .hallway {
+    width: 90%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f4f4f9;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    position: relative;
+  }
+  /* Emergency light container */
+  .emergency-light-container {
+    position: relative;
+    width: 240px;
+    height: 60px;
+    margin-bottom: 40px;
+  }
+
+  .black-box {
+    width: 240px;
+    height: 60px;
+    background: #1b1b1b;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .emergency-light {
+    width: 240px;
+    height: 60px;
+    background: linear-gradient(145deg, rgba(255, 0, 0, 0.3), rgba(180, 0, 0, 0.6));
+    border: 2px solid rgba(255, 0, 0, 0.3);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.3),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.2),
+        inset 4px 4px 10px rgba(0, 0, 0, 0.5);
+    transform: perspective(400px) rotateX(5deg);
+    transition: all 0.3s ease;
+}
+
+.emergency-light.on {
+    background: linear-gradient(145deg, rgba(255, 0, 0, 0.5), rgba(180, 0, 0, 0.7));
+    box-shadow:
+        0 0 20px rgba(255, 0, 0, 0.6),
+        0 0 40px rgba(255, 0, 0, 0.4),
+        0 0 60px rgba(255, 0, 0, 0.3),
+        inset 0 0 15px rgba(255, 0, 0, 0.7);
+    animation: pulse 3s infinite;
+}
+
+.emergency-light.on::before,
+.emergency-light.on::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow:
+        0 0 30px rgba(255, 0, 0, 0.4),
+        0 0 50px rgba(255, 0, 0, 0.3),
+        inset 0 0 40px rgba(255, 0, 0, 0.5);
+    opacity: 0.4;
+    animation: flicker 2s infinite alternate;
+}
+
+.text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+.emergency-light.on .text {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 12px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.8);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow:
+            0 0 20px rgba(255, 0, 0, 0.5),
+            0 0 40px rgba(255, 0, 0, 0.3),
+            0 0 60px rgba(255, 0, 0, 0.2),
+            inset 0 0 15px rgba(255, 0, 0, 0.6);
+    }
+    50% {
+        box-shadow:
+            0 0 25px rgba(255, 0, 0, 0.6),
+            0 0 50px rgba(255, 0, 0, 0.4),
+            0 0 80px rgba(255, 0, 0, 0.3),
+            inset 0 0 25px rgba(255, 0, 0, 0.7);
+    }
+}
+
+@keyframes flicker {
+    0%, 60% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    40%, 100% {
+        opacity: 0.5;
+        transform: scale(1.02);
+    }
+}
+
+
+  /* Door container */
+  .door-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 70%;
+    height: 100%;
+     background: #d1d8e1;
+    border-radius: 10px;
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  .door {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to bottom, #d7dbe0, #afb4b8);
+    position: absolute;
+    top: 0;
+    transition: transform 0.5s ease, width 0.5s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset -2px -2px 8px rgba(255, 255, 255, 0.3), inset 2px 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #888;
+}
+
+  .door.left {
+    left: 0;
+  }
+
+  .door.right {
+    right: 0;
+  }
+
+  .door.closed.left {
+    transform: translateX(0);
+  }
+
+  .door.closed.right {
+    transform: translateX(0);
+  }
+
+  .door.open.left {
+    transform: translateX(-5%);
+  }
+
+  .door.open.right {
+    transform: translateX(5%);
+  }
+
+  /* Door handles */
+  .door-handle {
+    width: 15px;
+    height: 60px;
+    background-color: #757575;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+  }
+
+  .door.left .door-handle {
+    right: 20px;
+  }
+
+  .door.right .door-handle {
+    left: 20px;
+  }
+
+  /* Nurse figure */
+  .figure {
+    width: 50px;
+    height: 100px;
+    background-image: url('nurse-surgical-uniform.png'); /* Placeholder for nurse image */
+    background-size: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: walk 3s infinite linear;
+    display: none;
+  }
+
+  @keyframes walk {
+    0% { transform: translate(-50%, -50%) translateX(0); }
+    50% { transform: translate(-50%, -50%) translateX(20px); }
+    100% { transform: translate(-50%, -50%) translateX(0); }
+  }
+/* Speech bubble */
+
+.speech-bubble {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: #fff;
+    padding: 15px;
+    border-radius: 20px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    border: 1px solid #333; /* 1px border for the bubble */
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.speech-bubble.show {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.speech-bubble.hide {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+.video-background {
+    position: absolute;
+    top: 60px;
+    left: 190px;
+    width: 40%;
+    height: 40%;
+    object-fit: cover;
+    z-index: 1;
+	border: 10px solid rgba(64, 64, 64) ;
+
+     opacity: 0.9;
+  }
+          /* Import Google Fonts */
+          @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@900&display=swap');
+
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
+  
+          body {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              background: #B2CFED; /* Light blue background */
+              font-family: 'Cinzel', serif; /* Elegant font for the entire page */
+              color: #081E51; /* Dark navy blue for text */
+              overflow: hidden;
+          }
+  
+          .countdown-container {
+              display: flex;
+              gap: 20px;
+              top: 10px;
+              background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(178, 207, 237, 0.5)); /* Light blue glassy gradient */
+              padding: 30px 50px;
+              border-radius: 25px;
+              box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(255, 255, 255, 0.05); /* Subtle shadow */
+              position: relative;
+              overflow: hidden;
+              border: 1px solid rgba(178, 207, 237, 0.4); /* Light blue border for glassy effect */
+              backdrop-filter: blur(10px) saturate(150%);
+              transition: transform 0.2s ease;
+          }
+  
+          /* SVG for the ECG-like trailing line */
+          .trailing-line {
+              position: absolute;
+              top: 50%;
+              left: 0;
+              width: 100%;
+              height: 100px; /* Adjusted height to show full range of peaks and troughs */
+              overflow: visible;
+              z-index: 0;
+          }
+  
+          .trailing-line path {
+              stroke-dasharray: 300; /* Set dash length to cover entire path */
+              stroke-dashoffset: 300;
+              stroke-width: 1.2; /* Thinner line */
+              stroke: rgba(28, 173, 47, 0.5); /* Lighter red with reduced opacity */
+              animation: drawLine 4s linear infinite; /* Faster animation */
+              stroke-linecap: round; /* Smooth ends for line */
+          }
+  
+          /* Animation for drawing the line progressively */
+          @keyframes drawLine {
+              0% {
+                  stroke-dashoffset: 300;
+              }
+              100% {
+                  stroke-dashoffset: 0;
+              }
+          }
+  
+          /* Countdown Block Styling */
+          .countdown-block {
+              text-align: center;
+              color: #081E51; /* Dark navy for contrast */
+              padding: 0 20px;
+              position: relative;
+              z-index: 1;
+              top: -10px;
+              border-radius: 15px;
+              background: rgba(255, 255, 255, 0.2); /* Subtle glassy white */
+              padding: 20px;
+              box-shadow: inset 0 1px 3px rgba(178, 207, 237, 0.3); /* Inner light blue shadow */
+          }
+  
+          .countdown-number {
+              font-size: 3.5rem;
+              font-weight: 900;
+              color: #FF5A5F; /* Coral red for countdown numbers */
+              display: block;
+              transition: transform 0.2s ease-in-out;
+              font-family: 'Orbitron', sans-serif; /* Stylish futuristic font for numbers */
+              
+              /* Gradient background for the numbers */
+              background: linear-gradient(145deg, #FF6B6F, #FF4C4F); 
+              -webkit-background-clip: text; /* Apply gradient clip for WebKit browsers */
+              background-clip: text; /* Non-prefixed version (for future compatibility) */
+              
+              /* Ensures the gradient shows through */
+              color: transparent; 
+              text-shadow: 0 3px 8px rgba(255, 90, 95, 0.5); /* Soft coral glow */
+          }
+  
+          .countdown-number:hover {
+              transform: scale(1.15);
+          }
+  
+          .countdown-label {
+              font-size: 1.3rem;
+              font-weight: 700;
+              color: #696969; /* Gray for labels */
+              letter-spacing: 1px;
+              margin-top: 8px;
+              text-transform: uppercase;
+              font-family: 'Cinzel', serif;
+          }
+  
+          /* Responsive Design */
+          @media (max-width: 600px) {
+              .countdown-container {
+                  flex-direction: column;
+                  padding: 20px;
+                  top: 20px;
+                  gap: 15px;
+              }
+  
+              .countdown-number {
+                  font-size: 2.5rem;
+              }
+  
+              .countdown-label {
+                  font-size: 1rem;
+              }
+          }
+
+  

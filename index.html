@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Emergency Room Door</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="hallway">
+  <!-- Emergency light -->
+  <div class="emergency-light-container">
+    <div class="black-box"></div>
+    <div class="emergency-light" onclick="toggleLight()">
+      <div class="text">Emergency</div>
+    </div>
+  </div>
+
+  <!-- Door and Nurse Figure -->
+  <div class="door-container" onclick="tryOpenDoor()">
+    <div class="door left closed">
+        <video class="video-background" autoplay="" loop="" muted="">
+            <source src="v2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+      <div class="door-handle"></div>
+    </div>
+    <div class="door right closed">
+        <video class="video-background" autoplay="" loop="" muted="">
+            <source src="v2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+      <div class="door-handle"></div>
+    </div>
+    <div class="figure"></div>
+    <div class="speech-bubble">
+        <span class="speech-text">Operation is still underway...</span>
+      </div>    
+  </div>
+  <div class="countdown-container">
+    <!-- SVG for the ECG-like line, covering the full width -->
+    <svg class="trailing-line" viewBox="0 0 100 20" preserveAspectRatio="none">
+        <!-- Path starts from M0 5 and extends to L100 5 for a seamless loop -->
+        <path id="wave-path" d="M0 5 L10 5 L15 -18 L20 20 L23 -5 L25 5 L30 5 L35 5 L40 5 L45 5 L50 -18 L55 20 L58 -5 L60 10 L62 5 L65 5 L70 5 L75 5 L80 5 L90 5 L100 5" fill="none" stroke="#FF5A5F" stroke-width="1.5"></path>
+    </svg>
+    
+    <!-- Countdown blocks -->
+    <div class="countdown-block">
+        <span id="days" class="countdown-number">29</span>
+        <span class="countdown-label">Days</span>
+    </div>
+    <div class="countdown-block">
+        <span id="hours" class="countdown-number">01</span>
+        <span class="countdown-label">Hours</span>
+    </div>
+    <div class="countdown-block">
+        <span id="minutes" class="countdown-number">42</span>
+        <span class="countdown-label">Minutes</span>
+    </div>
+    <div class="countdown-block">
+        <span id="seconds" class="countdown-number">42</span>
+        <span class="countdown-label">Seconds</span>
+    </div>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
